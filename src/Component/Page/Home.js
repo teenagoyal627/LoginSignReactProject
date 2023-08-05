@@ -1,8 +1,9 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import { useUserAuth } from "../Context/UserAuthContextProvider";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Home()
 {
+    const history=useHistory()
     const {user,logOut}=useUserAuth();
    console.log(user);
    const handleLogOut = async () =>
@@ -13,6 +14,7 @@ function Home()
     } catch (err) {
         console.log(err.message);
     }
+    history.replace("/signup")
 
    };
     return(
@@ -22,11 +24,22 @@ function Home()
           <br/>
             {user && user.email}
             </div>
-            <div className="d-grid gap-2">
-                <Button variant="primary"
-                onClick={handleLogOut}>
-                  Log out</Button>
-            </div>
+            <div>
+            <button
+            onClick={handleLogOut}
+              style={{
+                backgroundColor: " #d57969",
+                alignItem:"center",
+                width: "25rem",
+                padding: "0.5rem",
+                marginLeft: "35rem",
+                borderRadius: "1rem",
+                fontSize: "1.3rem",
+              }}
+            >
+             Logout
+            </button>
+          </div>
         
         
         </div>

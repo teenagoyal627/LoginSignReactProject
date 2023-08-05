@@ -1,23 +1,12 @@
-import React  from "react";
 import { useUserAuth } from "./Context/UserAuthContextProvider";
-import { Redirect} from 'react-router-dom';
-// import {useNavigate} from 'react-router-dom';
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+const ProtectedRoute = ({ children }) => {
+  const history = useHistory();
+  let { user } = useUserAuth();
 
-const ProtectedRoute =({children})=>
-{
-    // let navigate = useNavigate();
-
-    let {user}=useUserAuth();
-
-    if(!user){
-        return (
-        <Redirect to="/signup" />
-        // navigate('/login')
-        // <Navigate to="login"  replace={true} />
-        // <Redirect to ='/login'/>
-        );
-    }
-    return children;
-
+  if (!user) {
+    return history.replace("/signup");
+  }
+  return children;
 };
 export default ProtectedRoute;
